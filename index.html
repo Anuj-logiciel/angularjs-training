@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Angularjs Training</title>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	
+	<script src="http://code.angularjs.org/1.2.13/angular.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.8/angular-ui-router.min.js"></script>
+
+	<script src="app.js"></script>
+
+</head>
+<body ng-app="myApp">
+	<div>
+		<nav class="navbar navbar-inverse" role="navigation">
+			<div class="navbar-header">
+				<a class="navbar-brand" ui-sref="home">AngularUI Router Home</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li><a ui-sref="apply-leave">Apply leave</a></li>
+				<li><a ui-sref="leaves-listing">All Leaves</a></li>
+				<li><a ui-sref="school">School</a></li>
+			</ul>
+		</nav>
+		<div class="container">
+			<div ui-view></div>
+		</div>
+	</div>
+</body>
+</html>
