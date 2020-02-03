@@ -13,7 +13,7 @@
 	=> https://www.bennadel.com/blog/2777-monitoring-http-activity-with-http-interceptors-in-angularjs.htm
 
 ### Storages:
-	=>LocalStorage
-	=>Session Storage
-	=>Cookies
-	=>Sqllite DB
+	=> LocalStorage
+	=> Session Storage
+	=> Cookies
+	=> Sqllite DB
