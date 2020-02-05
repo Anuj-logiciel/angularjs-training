@@ -1,7 +1,4 @@
 angular.module('myApp', ['ui.router'])
-	.run(function($templateCache){
-		$templateCache.put('school.html', '<b>This is my old skool</b>')
-	})
 	.config(function($stateProvider, $urlRouterProvider) {
 		
 		$urlRouterProvider.otherwise('/home');
@@ -24,7 +21,62 @@ angular.module('myApp', ['ui.router'])
 			})
 
 	})
-	.controller('appController', function() {
+	.factory('sqlDB', function() {
+		// https://github.com/reduardo7/angular-sqlite
+		// https://www.tutorialspoint.com/html5/html5_web_sql.htm
+		// var db = openDatabase(dbCfg.name, dbCfg.version, dbCfg.description, ((dbCfg.size || 10) * 1024 * 1024))
+		var _db = window.openDatabase('trainings', '1.0', 'This is training DB', 10 * 1024 * 1024)
+
+
+		this.createTable = function(tableName) {
+			_db.transaction(function (tx) {
+				var sql = 'CREATE TABLE IF NOT EXISTS logiciels (id INTEGER unique, name TEXT, division TEXT)';
+				var q = tx.executeSql(sql, [], function(scss, rslt) {
+					console.log(scss, rslt);
+				}, function(er, err) {
+					console.log(er, err);
+				});
+				console.log(q);
+			})
+		}
+
+
+		this.insertUser = function(id, name, division) {
+			_db.transaction(function (tx) {
+				var sql = 'INSERT INTO logiciels (id, name, division) VALUES ('+id+',"'+name+'","'+division+'")';
+				console.log(sql);
+				var q = tx.executeSql(sql, [], function(scss, rslt) {
+					console.log(scss, rslt);
+				}, function(er, err) {
+					console.log(er, err);
+				});
+				console.log(q);
+			})
+		}
+
+
+		this.getAllDBUsers = function(argument) {
+			_db.transaction(function (tx) {
+				var sql = 'SELECT * FROM logiciels';
+				console.log(sql);
+				var q = tx.executeSql(sql, [], function(scss, rslt) {
+					console.log(scss, rslt);
+					return rslt;
+				}, function(er, err) {
+					console.log(er, err);
+				});
+				console.log(q);
+			})
+		}
+
+		return {
+			createTable: this.createTable,
+			insertUser: this.insertUser,
+			getAllDBUsers: this.getAllDBUsers
+		}
+
+	})
+	.controller('appController', function(sqlDB) {
 		var viewdata = this;
 		viewdata.myName = 'Anuj Singh';
 
@@ -40,4 +92,9 @@ angular.module('myApp', ['ui.router'])
 			document.cookie = "username=John Doe";
 		}
 
-	})
+		// sqlDB.createTable('logiciel-emps');
+		sqlDB.insertUser(3, 'Singga', 'Defaulter');
+		var data = sqlDB.getAllDBUsers();
+
+		console.log(data);
+	});
