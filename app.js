@@ -1,24 +1,41 @@
-angular.module('myApp', ['ui.router'])
-	.config(function($stateProvider, $urlRouterProvider) {
+angular.module('myApp', ['ngRoute'])
+	.config(function($routeProvider) {
 		
-		$urlRouterProvider.otherwise('/home');
 
-		$stateProvider
-			.state('home', {
-				url: '/home',
+		// $stateProvider
+		// 	.state('home', {
+		// 		url: '/home',
+		// 		templateUrl: 'pages/home.html',
+		// 		controller: 'appController as ctrl'
+		// 	})
+		// 	.state('apply-leave', {
+		// 		url: '/apply-leave?id?name',
+		// 		templateUrl: 'pages/apply-leave.html',	
+		// 		controller: 'appController as ctrl'
+		// 	})
+		// 	.state('leaves-listing', {
+		// 		url: '/leaves-listing?id?name',
+		// 		templateUrl: 'pages/leaves-listing.html',	
+		// 		controller: 'appController as ctrl'
+		// 	})
+
+		$routeProvider
+			.when('/home', {
 				templateUrl: 'pages/home.html',
 				controller: 'appController as ctrl'
 			})
-			.state('apply-leave', {
-				url: '/apply-leave',
+			.when('/apply-leave', {
 				templateUrl: 'pages/apply-leave.html',	
 				controller: 'appController as ctrl'
 			})
-			.state('leaves-listing', {
-				url: '/leaves-listing',
+			.when( '/leaves-listing', {
 				templateUrl: 'pages/leaves-listing.html',	
 				controller: 'appController as ctrl'
 			})
+			.otherwise({
+				redirectTo: '/home'
+			});
+
 
 	})
 	.factory('sqlDB', function() {
@@ -90,6 +107,10 @@ angular.module('myApp', ['ui.router'])
 
 		viewdata.setCookie = function() {
 			document.cookie = "username=John Doe";
+		}
+
+		viewdata.navigate = function(state) {
+			// $state.go(state, {id: '1', name: 'anuj'})
 		}
 
 		// sqlDB.createTable('logiciel-emps');
