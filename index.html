@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+	<head>
+		<meta charset="UTF-8">
+		<title>AngularJS Training</title>
+	 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.24/angular-ui-router.js"></script>
+	 	<script src="app.js"></script>
+	</head>
+	<body>
+		<div ng-controller="myComponent as todoList">
+			<p>
+				{{todoList.myName}}
+				<br>
+				{{myRealName}}
+				<br>
+				<my-directive></my-directive>
+			</p>
+		</div>
+	</body>
+</html>
